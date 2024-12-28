@@ -1,0 +1,159 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            border: 2px solid #ddd;
+        }
+
+        .navbar .profile span {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .hero {
+            margin-top: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .subject-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            margin: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .subject-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .subject-box input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            background: transparent;
+            text-align: center;
+        }
+
+        .subject-box button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .subject-box button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .form-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .subject-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="navbar">
+        <div class="logo">
+            <h2>Exam Portal</h2>
+        </div>
+        <div class="profile">
+            
+            <img src="{% static imagepath %}" alt="Profile Picture">
+            <span>{{ username }}</span>
+        </div>
+    </div>
+
+   
+    <div class="hero">
+        <h1>Welcome to the Exam Portal, {{ username }}</h1>
+        <form method="get" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {% for subject in listofsubject %}
+                <div class="subject-box">
+                    <input type="text" readonly value="{{ subject.subject }}">
+                    <button type="submit" name="subject" value="{{ subject.subject }}" formaction="/examapp/starTest/">Start Exam</button>
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+    </div>
+</body>
+</html>

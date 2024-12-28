@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f1f6f2;
+            margin-top: 20px;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        input[type="search"] {
+            width: 80%;
+            padding: 10px;
+            margin-top: 20px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="search"]:focus {
+            border-color: #4CAF50;
+        }
+
+        button {
+            display: inline-block;
+            background-color: #333;
+            color: white;
+            padding: 12px 25px;
+            margin-top: 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f1f6f2;
+            color: #000;
+        }
+
+        a {
+            display: inline-block;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #fff;
+            color: #130707;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to the Dashboard</h1>
+    </div>
+    <form method="post">
+        <div class="container">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+                <p>Hello, {{ user.username }}!</p>
+                <!-- <a href="/logout">Logout</a> -->
+
+                <button type="submit" formaction="/logout/"> logout</button>
+
+                <input type="search" name="data" placeholder="Search on google">
+
+                <button type="submit" formaction="/search/">Search</button>
+                <form method="get">
+                    <button type="submit" formaction="/examapp/managequestiondata/">Manage Questions Data </button>
+                </form>
+               
+                <button type="submit" formaction="/examapp/view_resultdata/">View Exam Result </button>
+                <button type="submit" formaction="/search/">Search</button>
+
+            {% else %}
+                
+            {% endif %}
+        </div>
+    </form>
+    
+
+    <div class="footer">
+        <p>&copy; 2024 Dashboard. All rights reserved.</p>
+    </div>
+</body>
+</html>
+

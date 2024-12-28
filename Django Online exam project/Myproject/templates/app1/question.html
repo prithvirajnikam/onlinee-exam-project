@@ -1,0 +1,105 @@
+<html>
+
+<html></html>
+
+<head>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        input[type='text'] {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+    border: none; /* Removes the border */
+    background-color: transparent; /* Makes the background transparent */
+    font-size: 16px; /* Optional: Adjusts font size */
+    color: #333; /* Optional: Adjusts text color */
+}
+
+        input[type='radio'] {
+            margin-right: 5px;
+        }
+        input[type='submit'] {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: goldenrod;
+            color: white;
+        }
+        input[type='submit']:hover {
+            background-color: rgb(249, 228, 176);
+            color: black;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+
+    <form  method="get">
+       
+        {% csrf_token %}
+
+        
+        <input type="text" name="qno" value="{{questionno}}"readonly> 
+        
+        <input type="text" name="qtext" value="{{question.qtext}}"readonly>
+
+        <input type="hidden" name="answer" value="{{question.answer}}"readonly>
+
+        <input type="radio" name="op" value="{{ question.op1 }}" 
+        {% if check == question.op1 %}checked{% endif %}> <span style="color:orange">{{ question.op1 }}</span>
+    
+    <input type="radio" name="op" value="{{ question.op2 }}" 
+        {% if check == question.op2 %}checked{% endif %}> <span style="color:orange">{{ question.op2 }}</span>
+    
+    <input type="radio" name="op" value="{{ question.op3 }}" 
+        {% if check == question.op3 %}checked{% endif %}> <span style="color:orange">{{ question.op3 }}</span>
+    
+    <input type="radio" name="op" value="{{ question.op4 }}" 
+        {% if check == question.op4 %}checked{% endif %}> <span style="color:orange">{{ question.op4 }}</span>
+    
+
+        <input type="hidden" type="text" name="subject" value="{{question.subject}}"><br><br>
+
+       
+
+        
+        <input type="submit"  formaction="/examapp/next/"  value="Next" {% if disable %}disabled style="background-color: beige; color: black;"  {% endif %}>
+            
+        
+        <input type="submit" value="back" formaction="/examapp/back/" >       
+        <input type="submit" value="end exam" formaction="/examapp/endexam/">
+      
+
+    </form>
+
+   
+
+
+  
+
+</body>
+
+
+</html>
+</html>

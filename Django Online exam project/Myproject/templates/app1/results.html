@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            border: 2px solid #ddd;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .summary {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .summary h4 {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .results-table th, .results-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .results-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1em;
+        }
+
+        .results-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .results-table tr:hover {
+            background-color: #e8f5e9;
+        }
+
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: red;
+            font-weight: bold;
+        }
+
+        .status {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            .results-table th, .results-table td {
+                font-size: 0.9em;
+                padding: 8px;
+            }
+
+            .summary h4 {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Exam Results</h1>
+    <div class="summary">
+        <h4><img src="{% static profile_pic %}"   >{{ username }}'s Score: {{percentage}}%   {{ score }}/{{total_question}} </h4>
+       
+    </div>
+    <table class="results-table">
+        <thead>
+            <tr>
+                <th>Question No</th>
+                <th>Question</th>
+                <th>Correct Answer</th>
+                <th>Your Answer</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in correct_wrong %}
+            <tr>
+                <td>{{ i.qno }}</td>
+                <td>{{ i.qtext }}</td>
+                <td class="correct">{{ i.answer }}</td>
+                <td >{{ i.wrong_ans }}</td>
+                <td class="status">{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="summary">
+        
+    </div>
+    
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function change(ele){
+            // var a=document.getElementById("tbox")
+            ele.style.color="red"
+
+
+        }
+        
+        function change1(ele){
+            // var a=document.getElementById("tbox")
+            ele.style.color="orange"
+
+
+        }
+
+        function thema(){
+            body=document.body;
+            body.style.backgroundColor = "#333";
+            
+        }
+
+    </script>
+</head>
+<body>
+    <input type="text" id="tbox"  value="JavaScript" onfocus="change(this) " onblur="change1(this)">
+    <button type="button"  id="btn" onfocus="thema(this)">change</button>
+    
+</body>
+</html>
